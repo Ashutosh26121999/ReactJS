@@ -1,0 +1,33 @@
+{
+  "name": "namste_reactjs",
+  "version": "1.0.0",
+  "description": "This is Namste reactJS by Ashutosh Mishra",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/Ashutosh26121999/ReactJS.git"
+  },
+  "keywords": [
+    "learn",
+    "react"
+  ],
+  "author": "Ashutosh Mishra",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Ashutosh26121999/ReactJS/issues"
+  },
+  "homepage": "https://github.com/Ashutosh26121999/ReactJS#readme",
+  "devDependencies": {
+    "parcel": "^2.12.0",
+    "process": "^0.11.10"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "browserslist": [
+   " last 0 versions"
+  ]
+}

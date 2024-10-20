@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Namaste React</title>
+    <link rel="stylesheet" href="./index.css">
+</head>
+<body>
+    <!-- by using HTML -->
+    <div id="htmlroot">
+        <p id="pr">Namaste Messsage by using pure HTML</p>
+    </div>
+     <!-- by using pure JS -->
+    <div id="jsroot">
+    </div>
+    <!-- by using React -->
+    <div id="root">
+        <!-- this Tag is replaced by React when it is loaded -->
+        <p id="pr">Allready installed React</p>
+    </div>
+</body>
+</html>
+   <!-- JavaScript should run only after the window is fully loaded -->
+   <script>
+    window.onload = function() {
+        const jsroot = document.getElementById("jsroot");
+
+        if (jsroot) {
+            const childTagusingJS = document.createElement("h4");
+            childTagusingJS.id = "h1PureJS";
+            childTagusingJS.innerText = "Namaste Message by using pure JS";
+            jsroot.appendChild(childTagusingJS);
+        } else {
+            console.error('jsroot element not found');
+        }
+    };
+</script>
+<!-- <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script> -->
+<script crossorigin src="./App.js" type="module" ></script>
+
+
