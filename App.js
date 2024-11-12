@@ -803,7 +803,7 @@ const Body=()=>{
             {/* Restaurant Container */}
             <div className='restaurant-container'>
             {/* Restaurant Card */}
-            {/-* not using key << using index as key< use unique key */}
+            {/* not using key << using index as key< use unique key */}
             {
                 restaurantsList.map((restaurant)=>{
                     return <RestaurantCard key={restaurant.info.id} restaurant={restaurant}/>
