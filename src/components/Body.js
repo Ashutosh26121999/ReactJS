@@ -1,14 +1,43 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import RestaurantCard from "./RestaurantCard"
 import restaurantsList from "./Utils/restaurantList"
+import Shimmer from "./Shimmer"
 export default Body=()=>{
-    const [restaurants, setRestaurants] = useState(restaurantsList)
-    return(
-        <div className='body'>
+    const [mainList, setMainList] = useState([])
+    const [restaurants, setRestaurants] = useState([])
+    const [filteredRestaurants, setFilteredRestaurants] = useState("")
+    useEffect(()=>{
+        fetchData()
+    },[])
+    const fetchData = async () => {
+        const response = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=25.3176452&lng=82.9739144&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING")
+        const responseData = await response.json()
+        const data = await responseData.data
+        setRestaurants(data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants)
+        setMainList(data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants)
+    }
+    const searchRestaurants = () => {
+        const filterData = mainList.filter((res) => res.info.name.toLowerCase().includes(filteredRestaurants.toLowerCase()))
+        console.log(filteredRestaurants,"--filteredRestaurants--")
+        if(filterData.length !== 0){
+            setRestaurants(filterData)
+        }
+        return setFilteredRestaurants("")
+    }
+    const mainBody = () => {
+        return (
+            <div className='body'>
             {/* Search Bar */}
             <div className='search-container'>
                 {/* <input className='search-bar' type="text" /> */}
-                <button className='search-btn' onClick={() => {setRestaurants(restaurants.filter((res) => res.info.avgRating > 4.4))}}>Top Rated🌟</button>
+                <div>
+                    <input className='search-bar' type="text" placeholder="Search" 
+                    value={filteredRestaurants}
+                    onChange={(e) => {setFilteredRestaurants(e.target.value)}}
+                    />
+                    <button className='search-btn' onClick={searchRestaurants}>Search</button>
+                </div>
+                <button className='reating-search-btn' onClick={() => {setRestaurants(mainList.filter((res) => res.info.avgRating > 4.4))}}>Top Rated🌟</button>
             </div>   
 
             <div className='restaurant-wrapper'>
@@ -24,5 +53,9 @@ export default Body=()=>{
             </div>
             </div>
         </div>
+        );
+      };
+    return(
+        restaurants.length === 0? <Shimmer/> : mainBody()
         )
 }
