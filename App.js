@@ -1,47 +1,53 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import Header from './src/components/Header'
-import Body from './src/components/Body'
+import React from "react";
+import ReactDOM from "react-dom/client";
+import {Outlet, createBrowserRouter, RouterProvider} from "react-router-dom"; // Updated imports
+import Header from "./src/components/Header";
+import Body from "./src/components/Body";
+import About from "./src/components/About";
+import Contact from "./src/components/Contact";
+import Error from "./src/components/Error";
+import RestaurantMenu from "./src/components/RestaurantMenu";
 
 /**
- * Basice food odring app prject wirefrem in react
- * Header
- * - Logo
- * - Navigation Menu
- * Body
- * -Search Bar
- * - RestaurantContainer
- *    - RestaurantCard
- *       - Image
- *       - Name 
- *       - Price  
- *       - Rating
- *       - Cusines
- *       - Dilivery Time
- * Footer
- * -Copyright
- * - Links
- * - Address
- * - Contact
+ * Basic food ordering app project wireframe in React
  */
 
+const AppLayout = () => {
+  return (
+    <div className='app'>
+      {/* Header */}
+      <Header />
+      {/* Hear Outlet to render child routes of AppLayout according to the path */}
+      <Outlet />
+      {/* Footer */}
+    </div>
+  );
+};
+const routerConfig = createBrowserRouter([
+  {
+    path: "/",
+    element: <AppLayout />,
+    errorElement: <Error />,
+    children: [
+      {
+        path: "/about",
+        element: <About />,
+      },
+      {
+        path: "/contact",
+        element: <Contact />,
+      },
+      {
+        path: "/",
+        element: <Body />,
+      },
 
-
-
-
-
-
-const Applayout=()=>{
-    return(
-      <div className='app'>
-         {/* Header */}
-         <Header />
-         {/* Body */}
-         <Body />
-         {/* Footer */}
-      </div>
-    )
-}
-const root=ReactDOM.createRoot(document.getElementById("root"))
-root.render(<Applayout/>) //? this is way to render Componenet in react DOM
-
+      {
+        path: "/restaurant/:restaurant_id",
+        element: <RestaurantMenu />,
+      },
+    ],
+  },
+]);
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(<RouterProvider router={routerConfig} />);

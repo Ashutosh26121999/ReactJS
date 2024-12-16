@@ -3,9 +3,9 @@
  * @returns {React.ReactElement} Header component
  */
 
-import {LOGO} from "./Utils/constaints";
 import {useState} from "react";
 import logo from "../components/Utils/img/RestaurantLogo.png";
+import {Link} from "react-router-dom";
 const Header = () => {
   const [login, setLogin] = useState(false);
   return (
@@ -17,10 +17,27 @@ const Header = () => {
       {/* Navigation Menu */}
       <div className='nav-items'>
         <ul>
-          <li>Home</li>
-          <li>About</li>
-          <li>Contact</li>
-          <li>Cart</li>
+          <li>
+            <Link to='/' className='link'>
+              Home
+            </Link>
+          </li>
+          <li>
+            <Link to='/about' className='link'>
+              About
+            </Link>
+          </li>
+          <li>
+            {" "}
+            <Link to='/contact' className='link'>
+              Contact
+            </Link>
+          </li>
+          <li>
+            <Link to='/cart' className='link'>
+              Cart
+            </Link>
+          </li>
           <button
             className='login'
             onClick={() => {

@@ -18,8 +18,14 @@
 
 # React Hooks
 
-Normal Js Utilty Function which in Node module 
+Normal Js Utilty Function which in Node module
 
 1. useState
 2. useEffect
-3.
+
+- use CROSS extension to run this
+- in Body Component in the future may be required to check the API call function if it gets an error.
+
+Two Type of Routing
+1: Clint Side Routing: In Clint Side routing render page is not fetch from server and load entier page
+2: Server Side Routing: In Server Side routing render page is fetch from server and load entier page

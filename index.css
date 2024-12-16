@@ -1,218 +1,190 @@
+/* Reset default browser styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Header Section */
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #fdfdfd;
-  padding: 10px;
-  border: 2px solid black;
+  background-color: #fba950;
+  padding: 20px;
+}
+.login {
+  padding: 10px 20px;
+  background-color: #080808;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 .logo {
   width: 130px;
   height: 130px;
-  background-color: #2f86e8;
+  border-radius: 50%;
+  overflow: hidden;
 }
+
 .nav-items > ul {
   display: flex;
   list-style: none;
-  font-size: 22px;
+  font-size: 18px;
+  gap: 20px;
 }
+
 .nav-items > ul > li {
   padding: 10px;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  color: #f9f9f9;
 }
-.body {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #2f86e8;
-  padding: 10px;
-  border: 2px solid black;
-  flex-direction: column;
+
+.nav-items > ul > li:hover {
+  text-decoration: underline;
 }
-.search-bar {
-  padding: 10px;
-  font-size: 22px;
-  border: 2px solid black;
-  border-top-left-radius: 10px;
-  border-bottom-left-radius: 10px;
-}
-.search-btn {
-  padding: 10px;
-  font-size: 22px;
-  border: 2px solid black;
-  border-top-right-radius: 10px;
-  border-bottom-right-radius: 10px;
-}
-.restaurant-wrapper {
-  display: flex;
-  flex-direction: row;
-}
-.restaurant-container {
-  display: flex;
-  flex-wrap: wrap;
-  grid-template-columns: repeat(4, 1fr);
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px;
-  margin: 10px;
-  gap: 10px;
-  width: 100%;
-  height: inherit;
-}
+
+/* Search Container */
 .search-container {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  padding: 10px;
+  gap: 10px;
+  padding: 20px;
+  background-color: #f6f6f6;
+  border-radius: 8px;
 }
+
+.search-bar {
+  padding: 10px;
+  font-size: 18px;
+  border: none;
+  border-radius: 8px;
+  /* background-color: #f6f6f6; */
+  width: 300px;
+  color: #333;
+  transition: background-color 0.3s ease;
+  border-color: #fba950;
+}
+
+.search-btn {
+  padding: 10px 20px;
+  font-size: 18px;
+  background-color: #fba950;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.search-btn:hover {
+  background-color: #f9b368;
+}
+
+/* Restaurant Wrapper - Grid Layout */
+.restaurant-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 20px;
+  background-color: #fee6cc;
+  border-radius: 8px;
+  justify-content: center;
+}
+
+/* Restaurant Card */
 .restaurant-card {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  width: 250px;
-  height: inherit;
-  background-color: #fffafa;
-  margin: 10px;
-  border-radius: 10px;
-  padding: 10px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  width: 300px;
+  min-height: 350px;
 }
+
 .restaurant-card:hover {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  transition: 0.3s;
-  border: 2px solid red;
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
 .res-logo {
   width: 100%;
-  height: 10%;
+  height: 120px;
   object-fit: cover;
-  border-radius: 10px;
-  margin-bottom: 20px;
+  border-radius: 8px;
+  margin-bottom: 10px;
 }
 
 .res-data-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  padding: 10px;
+  text-align: center;
 }
 
 .res-name {
-  font-size: 22px;
+  font-size: 20px;
   font-weight: bold;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
+  color: #000000;
 }
 
-.res-price {
-  font-size: 18px;
-  font-weight: bold;
-}
-
-.res-rating {
-  font-size: 18px;
-  color: #666;
-}
-
-.res-cusines {
-  font-size: 18px;
-  color: #666;
-  margin-top: 20px;
-}
-
-.res-del-time {
-  font-size: 18px;
-  color: #666;
-}
-
-.res-name,
 .res-price,
 .res-rating,
-.res-del-time,
-.res-cusines {
-  margin-right: 0;
-  margin-left: 0;
+.res-cusines,
+.res-del-time {
+  font-size: 14px;
+  color: #2a1c1c;
+  margin-bottom: 4px;
 }
-
-.res-data-container > * {
-  margin-bottom: 10px;
-}
-
-/* Shimmer styles----start */
-.shimmer-container {
+.restaurant-rating {
   display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  padding: 20px;
   justify-content: center;
-  background-color: #2f86e8; /* Matches the background of the main page */
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+  color: #eeab3f;
 }
 
-.shimmer-card {
-  width: 200px;
-  height: 300px;
-  border-radius: 8px;
-  overflow: hidden;
-  background-color: #f0f0f0;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  padding: 10px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.shimmer-image {
-  width: 100%;
-  height: 150px;
-  background: linear-gradient(-90deg, #f0f0f0 0%, #e0e0e0 50%, #f0f0f0 100%);
-  background-size: 200% 100%;
-  animation: shimmer 1.5s infinite;
-  border-radius: 8px;
-}
-
-.shimmer-title,
-.shimmer-text {
-  height: 20px;
-  width: 80%;
-  background: linear-gradient(-90deg, #f0f0f0 0%, #e0e0e0 50%, #f0f0f0 100%);
-  background-size: 200% 100%;
-  animation: shimmer 1.5s infinite;
-  border-radius: 4px;
-}
-
-.shimmer-title {
-  width: 60%;
-  height: 25px;
-}
-
-.shimmer-text.small {
-  width: 50%;
+/* Shimmer Placeholder */
+.shimmer-placeholder {
+  background-image: linear-gradient(
+    to right,
+    rgba(247, 247, 247, 0.2),
+    rgba(247, 247, 247, 0.4),
+    rgba(247, 247, 247, 0.2)
+  );
+  background-size: 600px 60px;
+  animation: shimmer 2s infinite;
 }
 
 @keyframes shimmer {
   0% {
-    background-position: 200% 0;
+    background-position: -240px 0;
   }
   100% {
-    background-position: -200% 0;
+    background-position: 240px 0;
   }
 }
-/* Shimmer styles----end */
-.login {
-  padding: 10px;
-  font-size: 22px;
-  border: 2px solid black;
-  border-top-right-radius: 10px;
-  border-bottom-right-radius: 10px;
-  background-color: #2f86e8;
-  cursor: pointer;
+
+.link {
+  text-decoration: none !important;
+  color: inherit;
 }
-.reating-search-btn {
-  padding: 10px;
-  font-size: 22px;
-  border: 2px solid black;
-  border-top-right-radius: 10px;
-  border-bottom-right-radius: 10px;
-  background-color: #2f86e8;
-  cursor: pointer;
+.full-star-icon {
+  color: #fba950;
+}
+.half-star-icon {
+  color: #fba950;
+}
+.empty-star-icon {
+  color: #fba950;
 }

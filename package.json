@@ -22,14 +22,18 @@
   },
   "homepage": "https://github.com/Ashutosh26121999/ReactJS#readme",
   "devDependencies": {
+    "@mui/icons-material": "^6.1.9",
     "parcel": "^2.12.0",
     "process": "^0.11.10"
   },
   "dependencies": {
+    "@emotion/react": "^11.13.5",
+    "@emotion/styled": "^11.13.5",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.27.0"
   },
   "browserslist": [
-   " last 0 versions"
+    " last 0 versions"
   ]
 }
