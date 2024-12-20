@@ -188,3 +188,54 @@
 .empty-star-icon {
   color: #fba950;
 }
+
+.user_card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  width: 300px;
+}
+.avatar_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+.avatar {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.user_name {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 8px;
+  color: #000000;
+}
+.user_address {
+  font-size: 14px;
+  color: #2a1c1c;
+  margin-bottom: 4px;
+  text-align: justify;
+}
+.user_bio {
+  font-size: 14px;
+  color: #2a1c1c;
+  margin-bottom: 4px;
+}
+.user_links {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 12px;
+  color: #eeab3f;
+}

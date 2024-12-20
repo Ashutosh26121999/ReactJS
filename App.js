@@ -23,31 +23,43 @@ const AppLayout = () => {
     </div>
   );
 };
-const routerConfig = createBrowserRouter([
-  {
-    path: "/",
-    element: <AppLayout />,
-    errorElement: <Error />,
-    children: [
-      {
-        path: "/about",
-        element: <About />,
-      },
-      {
-        path: "/contact",
-        element: <Contact />,
-      },
-      {
-        path: "/",
-        element: <Body />,
-      },
+const routerConfig = createBrowserRouter(
+  [
+    {
+      path: "/",
+      element: <AppLayout />,
+      errorElement: <Error />,
+      children: [
+        {
+          path: "/about",
+          element: <About />,
+        },
+        {
+          path: "/contact",
+          element: <Contact />,
+        },
+        {
+          path: "/",
+          element: <Body />,
+        },
 
-      {
-        path: "/restaurant/:restaurant_id",
-        element: <RestaurantMenu />,
-      },
-    ],
+        {
+          path: "/restaurant/:restaurant_id",
+          element: <RestaurantMenu />,
+        },
+      ],
+    },
+  ],
+  {
+    future: {
+      v7_startTransition: true,
+      v7_normalizeFormMethod: true,
+      v7_fetcherPersist: true,
+      v7_relativeSplatPath: true,
+      v7_partialHydration: true,
+      v7_skipActionStatusRevalidation: true,
+    },
   },
-]);
+);
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(<RouterProvider router={routerConfig} />);
