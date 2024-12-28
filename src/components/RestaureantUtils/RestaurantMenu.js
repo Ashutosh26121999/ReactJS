@@ -1,36 +1,18 @@
-import React, {useEffect, useState} from "react";
-import StarRating from "./StarRating";
-import "./RestaurantMenu.css"; // Add a CSS file for styling
+import React from "react";
+import StarRating from "../../Utils/StarRating";
+import "../CSS/RestaurantMenu.css"; // Add a CSS file for styling
 import {useParams} from "react-router-dom";
-import {MENU_API, RESTAURANT_MENU_IMG} from "./Utils/constaints";
-import SimmerResMenu from "./SimmerResMenu";
+import {MENU_API, RESTAURANT_MENU_IMG} from "../../Utils/constaints";
+import SimmerResMenu from "../SimmerUtils/SimmerResMenu";
+import {useFetchAPI} from "../../Utils/customHooks/useFetchAPI";
 
 function RestaurantMenu() {
-  const [restaurantsDetails, setRestaurantsDetails] = useState({});
-  const [restaurantMenuItems, setRestaurantMenuItems] = useState([]);
-
   const {restaurant_id} = useParams();
+  const data = useFetchAPI(MENU_API + restaurant_id);
 
-  useEffect(() => {
-    fetchRestaurantMenuData();
-  }, []);
-
-  const fetchRestaurantMenuData = async () => {
-    try {
-      const response = await fetch(MENU_API + restaurant_id);
-      const responseData = await response.json();
-
-      setRestaurantsDetails(
-        responseData?.data?.cards[2]?.card?.card?.info || {},
-      );
-      setRestaurantMenuItems(
-        responseData?.data?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR
-          ?.cards[1]?.card?.card?.itemCards || [],
-      );
-    } catch (error) {
-      console.error("Error fetching restaurant data:", error);
-    }
-  };
+  if (data === null) {
+    return <SimmerResMenu />;
+  }
 
   const {
     name,
@@ -41,11 +23,13 @@ function RestaurantMenu() {
     costForTwoMessage,
     avgRating,
     totalRatings,
-  } = restaurantsDetails;
+  } = data?.cards[2]?.card?.card?.info || {};
 
-  return Object.keys(restaurantsDetails).length === 0 ? (
-    <SimmerResMenu />
-  ) : (
+  const restaurantMenuItems =
+    data?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card?.card
+      ?.itemCards || [];
+
+  return (
     <div className='restaurant-container'>
       {/* Restaurant Details */}
       <div className='restaurant-header'>
@@ -68,11 +52,11 @@ function RestaurantMenu() {
       {/* Menu Section */}
       <div className='restaurant-menu'>
         <h2 className='menu-title'>Recommended Menu</h2>
-        <ul className='menu-list'>
-          {restaurantMenuItems.length === 0 ? (
-            <Shimmer itemType='menu' />
-          ) : (
-            restaurantMenuItems.map((item) => (
+        {restaurantMenuItems.length === 0 ? (
+          <Shimmer itemType='menu' />
+        ) : (
+          <ul className='menu-list'>
+            {restaurantMenuItems.map((item) => (
               <li className='menu-item' key={item.card.info.id}>
                 <img
                   src={
@@ -95,9 +79,9 @@ function RestaurantMenu() {
                   </p>
                 </div>
               </li>
-            ))
-          )}
-        </ul>
+            ))}
+          </ul>
+        )}
       </div>
     </div>
   );

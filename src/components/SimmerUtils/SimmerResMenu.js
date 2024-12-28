@@ -1,5 +1,5 @@
 import React from "react";
-import "./RestaurantMenu.css";
+import "../CSS/RestaurantMenu.css";
 
 function SimmerResMenu({itemType}) {
   if (itemType === "menu") {

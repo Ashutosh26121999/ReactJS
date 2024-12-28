@@ -4,7 +4,7 @@
  */
 
 import {useState} from "react";
-import logo from "../components/Utils/img/RestaurantLogo.png";
+import logo from "../../Utils/img/RestaurantLogo.png";
 import {Link} from "react-router-dom";
 const Header = () => {
   const [login, setLogin] = useState(false);

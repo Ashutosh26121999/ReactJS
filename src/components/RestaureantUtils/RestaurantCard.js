@@ -1,5 +1,5 @@
-import StarRating from "./StarRating";
-import {CDN_URL} from "./Utils/constaints";
+import StarRating from "../../Utils/StarRating";
+import {CDN_URL} from "../../Utils/constaints";
 export default RestaurantCard = (props) => {
   const {cloudinaryImageId, name, costForTwo, avgRatingString, sla, cuisines} =
     props.restaurant.info;
