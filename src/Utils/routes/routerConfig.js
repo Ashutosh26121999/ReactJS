@@ -1,11 +1,7 @@
 import {lazy, Suspense} from "react";
-// import About from "../../components/About.js";
-// import Body from "../../components/Body.js";
-// import Contact from "../../components/Contact.js";
-// import xf from "../../components/Error.js";
-// import RestaurantMenu from "../../components/RestaureantUtils/RestaurantMenu.js";
 import AppLayout from "../../components/AppLayout.js";
 import {createBrowserRouter} from "react-router-dom";
+import Cart from "../../components/Cart.js";
 
 const RestaurantMenu = lazy(() =>
   import("../../components/RestaureantUtils/RestaurantMenu.js"),
@@ -55,6 +51,27 @@ export const routerConfig = createBrowserRouter(
           element: (
             <Suspense fallback={<h1>Loading...RestaurantMenu...</h1>}>
               <RestaurantMenu />
+            </Suspense>
+          ),
+          errorElement: (
+            <Suspense fallback={<h1>Loading...Error...</h1>}>
+              <Error />
+            </Suspense>
+          ),
+        },
+        {
+          path: "/cart",
+          element: (
+            <Suspense fallback={<h1>Loading...Cart...</h1>}>
+              <Cart />
+            </Suspense>
+          ),
+        },
+        {
+          path: "*",
+          element: (
+            <Suspense fallback={<h1>Loading...Error...</h1>}>
+              <Error />
             </Suspense>
           ),
         },

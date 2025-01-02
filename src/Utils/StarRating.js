@@ -15,22 +15,30 @@ const StarRating = ({rating, maxStars = 5}) => {
 
   // Render stars
   return (
-    <div style={{display: "flex"}}>
+    <div className='flex items-center'>
       {/* Render Full Stars */}
       {Array(fullStars)
         .fill(null)
         .map((_, index) => (
-          <FullStar key={`full-${index}`} className='full-star-icon' />
+          <FullStar
+            key={`full-${index}`}
+            className='text-yellow-400 dark:text-yellow-500'
+          />
         ))}
 
       {/* Render Half Star */}
-      {hasHalfStar && <HalfStar className='half-star-icon' />}
+      {hasHalfStar && (
+        <HalfStar className='text-yellow-400 dark:text-yellow-500' />
+      )}
 
       {/* Render Empty Stars */}
       {Array(emptyStars)
         .fill(null)
         .map((_, index) => (
-          <EmptyStar key={`empty-${index}`} className='empty-star-icon' />
+          <EmptyStar
+            key={`empty-${index}`}
+            className='text-gray-300 dark:text-gray-600'
+          />
         ))}
     </div>
   );
