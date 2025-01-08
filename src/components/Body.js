@@ -1,5 +1,7 @@
 import {useEffect, useState} from "react";
-import RestaurantCard from "./RestaureantUtils/RestaurantCard"; // Ensure this component handles the image rendering
+import RestaurantCard, {
+  RestaurantCardWithOffer,
+} from "./RestaureantUtils/RestaurantCard"; // Ensure this component handles the image rendering
 import Shimmer from "./SimmerUtils/Shimmer";
 import {Link} from "react-router-dom";
 import {RESTAURANT_MENU_API} from "../Utils/constaints";
@@ -9,28 +11,60 @@ export default function Body() {
   const mainList = useFetchAPI(RESTAURANT_MENU_API);
   const [restaurants, setRestaurants] = useState([]);
   const [filteredRestaurants, setFilteredRestaurants] = useState("");
+  const [restaurantsChain, setRestaurantsChain] = useState([]);
+  // offer Higher order component
+  const RestaurantCardWithOfferHOC = RestaurantCardWithOffer(RestaurantCard);
 
-  // Initialize the state once data is fetched
   useEffect(() => {
     if (mainList) {
-      const restaurantData =
+      const chainData =
         mainList?.cards?.[1]?.card?.card?.gridElements?.infoWithStyle
+          ?.restaurants || [];
+      setRestaurantsChain(chainData);
+
+      const restaurantData =
+        mainList?.cards?.[4]?.card?.card?.gridElements?.infoWithStyle
           ?.restaurants || [];
       setRestaurants(restaurantData);
     }
   }, [mainList]);
 
+  const showAllRestaurants = (restaurantsList) =>
+    restaurantsList.length > 0
+      ? restaurantsList.map((restaurant) => (
+          <Link
+            to={`/restaurant/${restaurant.info.id}`}
+            key={restaurant.info.id}
+            className='hover:shadow-lg transition'
+          >
+            {restaurant.info?.aggregatedDiscountInfoV3?.header.includes(
+              "OFF",
+            ) ? (
+              <RestaurantCardWithOfferHOC restaurant={restaurant} />
+            ) : (
+              <RestaurantCard restaurant={restaurant} />
+            )}
+          </Link>
+        ))
+      : null;
+
   const searchRestaurants = () => {
     if (filteredRestaurants !== "") {
-      const filterData = restaurants.filter((res) =>
-        res.info.name.toLowerCase().includes(filteredRestaurants.toLowerCase()),
-      );
-      setRestaurants(filterData.length > 0 ? filterData : []);
+      const filterData =
+        restaurants.filter((res) =>
+          res.info.name
+            .toLowerCase()
+            .includes(filteredRestaurants.toLowerCase()),
+        ) ||
+        restaurantsChain.filter((res) =>
+          res.info.name
+            .toLowerCase()
+            .includes(filteredRestaurants.toLowerCase()),
+        );
+
+      setRestaurants(filterData || []);
     } else {
-      setRestaurants(
-        mainList?.cards?.[1]?.card?.card?.gridElements?.infoWithStyle
-          ?.restaurants || [],
-      );
+      setRestaurants([restaurants, restaurantsChain].flat() || []);
     }
   };
 
@@ -57,7 +91,9 @@ export default function Body() {
           className='bg-orange-500 text-white px-4 py-2 rounded-lg shadow hover:bg-orange-600 transition mt-4 md:mt-0'
           onClick={() =>
             setRestaurants(
-              restaurants.filter((res) => res.info.avgRating > 4.4),
+              restaurants.filter((res) => res.info.avgRating > 4.4) ||
+                restaurantsChain.filter((res) => res.info.avgRating > 4.4) ||
+                [],
             )
           }
         >
@@ -65,22 +101,27 @@ export default function Body() {
         </button>
       </div>
 
-      {/* Restaurant Cards */}
-      <div className='grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
-        {restaurants.length > 0 ? (
-          restaurants.map((restaurant) => (
-            <Link
-              to={`/restaurant/${restaurant.info.id}`}
-              key={restaurant.info.id}
-              className='hover:shadow-lg transition'
-            >
-              {/* Use your RestaurantCard component to handle image and details */}
-              <RestaurantCard restaurant={restaurant} />
-            </Link>
-          ))
-        ) : (
-          <p className='text-center text-gray-500'>No restaurants found</p>
-        )}
+      {/* Top Restaurant Chains */}
+      <div className='mb-8'>
+        <h2 className='text-2xl font-semibold text-gray-800 dark:text-gray-200 mb-4'>
+          Top Restaurant Chains
+        </h2>
+        <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6'>
+          {showAllRestaurants(restaurantsChain)}
+        </div>
+      </div>
+
+      {/* Divider */}
+      <div className='w-full h-0.5 bg-gray-200 dark:bg-gray-700 my-8'></div>
+
+      {/* Restaurants with Online Food Delivery */}
+      <div>
+        <h2 className='text-2xl font-semibold text-gray-800 dark:text-gray-200 mb-4'>
+          Restaurants with Online Food Delivery
+        </h2>
+        <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6'>
+          {showAllRestaurants(restaurants)}
+        </div>
       </div>
     </div>
   );

@@ -26,8 +26,8 @@ const Header = () => {
             to='/'
             className='hover:text-gray-200 dark:hover:text-gray-400 flex items-center'
           >
-            <AiFillHome className='text-2xl mr-2' />
-            Home
+            <AiFillHome className='text-2xl lg:mr-2' />
+            <span className='hidden md:inline ml-2'>Home</span>
           </Link>
         </li>
         <li>
@@ -35,8 +35,8 @@ const Header = () => {
             to='/about'
             className='hover:text-gray-200 dark:hover:text-gray-400 flex items-center'
           >
-            <AiOutlineInfoCircle className='text-2xl mr-2' />
-            About
+            <AiOutlineInfoCircle className='text-2xl lg:mr-2' />
+            <span className='hidden md:inline ml-2'>About</span>
           </Link>
         </li>
         <li>
@@ -44,8 +44,8 @@ const Header = () => {
             to='/contact'
             className='hover:text-gray-200 dark:hover:text-gray-400 flex items-center'
           >
-            <AiFillPhone className='text-2xl mr-2' />
-            Contact
+            <AiFillPhone className='text-2xl lg:mr-2' />
+            <span className='hidden md:inline ml-2'>Contact</span>
           </Link>
         </li>
         <li>
@@ -53,13 +53,13 @@ const Header = () => {
             to='/cart'
             className='hover:text-gray-200 dark:hover:text-gray-400 flex items-center relative'
           >
-            <BsCart3 className='text-2xl mr-2' />
-            Cart
+            <BsCart3 className='text-2xl lg:mr-2' />
             {totalQuantity > 0 && (
               <span className='absolute top-0 right-0 transform translate-x-2 -translate-y-2 bg-white text-orange-500 dark:bg-gray-600 dark:text-gray-200 font-semibold text-sm px-2 py-1 rounded-full'>
                 {totalQuantity}
               </span>
             )}
+            <span className='hidden md:inline ml-2'>Cart</span>
           </Link>
         </li>
         <li>
@@ -69,32 +69,31 @@ const Header = () => {
           >
             {login ? (
               <>
-                <RiLogoutCircleFill className='text-2xl mr-2' />
-                Logout
+                <RiLogoutCircleFill className='text-2xl mr-2 lg:mr-2' />
+                <span className='hidden md:inline ml-2'>Logout</span>
               </>
             ) : (
               <>
-                <RiLoginCircleFill className='text-2xl mr-2' />
-                Login
+                <RiLoginCircleFill className='text-2xl lg:mr-2' />
+                <span className='hidden md:inline ml-2'>Login</span>
               </>
             )}
           </button>
         </li>
         <li>
-          {/* Theme Toggle Button */}
           <button
             className='bg-white dark:bg-gray-700 text-orange-500 dark:text-gray-200 px-4 py-2 rounded-full shadow hover:bg-orange-100 dark:hover:bg-gray-600 transition flex items-center'
             onClick={() => dispatch(toogleTheme())}
           >
             {darkMode ? (
               <>
-                <MdLightMode className='text-2xl mr-2' />
-                Light Mode
+                <MdLightMode className='text-2xl lg:mr-2' />
+                <span className='hidden md:inline ml-2'>Light Mode</span>
               </>
             ) : (
               <>
-                <MdOutlineDarkMode className='text-2xl mr-2' />
-                Dark Mode
+                <MdOutlineDarkMode className='text-2xl lg:mr-2' />
+                <span className='hidden md:inline ml-2'>Dark Mode</span>
               </>
             )}
           </button>

@@ -34,7 +34,6 @@ function Contact() {
       )
       .then(
         (response) => {
-          console.log("Email sent successfully:", response);
           alert("Your message has been sent!");
           setFormData({name: "", email: "", message: ""}); // Clear form
         },

@@ -9,7 +9,7 @@ const EmptyStar = () => <StarBorder fontSize='small' />;
 // Rating Component
 const StarRating = ({rating, maxStars = 5}) => {
   // Calculate the number of stars
-  const fullStars = Math.floor(rating); // Full stars
+  const fullStars = Math.floor(rating) || 0; // Full stars
   const hasHalfStar = rating % 1 >= 0.5; // Whether to show a half star
   const emptyStars = maxStars - fullStars - (hasHalfStar ? 1 : 0); // Empty stars
 

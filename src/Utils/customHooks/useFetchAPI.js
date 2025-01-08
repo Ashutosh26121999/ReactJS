@@ -7,11 +7,6 @@ export const useFetchAPI = (url) => {
         const response = await fetch(url);
         const jsonData = await response.json();
         setData(jsonData?.data);
-        console.log(
-          "Datat of Res list",
-          jsonData?.data?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]
-            ?.card?.card?.itemCards,
-        );
       } catch (error) {
         console.log("Error fetching data:", error);
       }

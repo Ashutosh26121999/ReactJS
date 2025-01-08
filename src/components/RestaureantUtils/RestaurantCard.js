@@ -32,7 +32,13 @@ export default function RestaurantCard(props) {
         </h3>
 
         {/* Rating */}
-        <div className='flex items-center mt-2'>
+        <div
+          className={`flex items-center mt-2 ${
+            avgRatingString < 4
+              ? "text-orange-500 dark:text-orange-800"
+              : "text-green-500 dark:text-green-800"
+          }`}
+        >
           <StarRating rating={avgRatingString} />
         </div>
 
@@ -44,3 +50,18 @@ export default function RestaurantCard(props) {
     </div>
   );
 }
+// Resutrent card With OFFER Higher oreder Component
+export const RestaurantCardWithOffer = (Component) => {
+  return (props) => {
+    return (
+      <div className='relative'>
+        {/* Offer Label */}
+        <h5 className='text-sm text-white bg-orange-500 absolute top-2 left-2 px-2 py-1 font-bold rounded-md shadow-md dark:bg-black dark:text-gray-200'>
+          {`${props.restaurant.info?.aggregatedDiscountInfoV3?.header} ${props.restaurant.info?.aggregatedDiscountInfoV3?.subHeader}`}
+        </h5>
+        {/* Original Component */}
+        <Component {...props} />
+      </div>
+    );
+  };
+};
