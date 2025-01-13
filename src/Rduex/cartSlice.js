@@ -1,4 +1,3 @@
-import {dark} from "@mui/material/styles/createPalette";
 import {createSlice} from "@reduxjs/toolkit";
 
 const initialState = {

@@ -14,18 +14,21 @@ export default function Body() {
   const [restaurantsChain, setRestaurantsChain] = useState([]);
   // offer Higher order component
   const RestaurantCardWithOfferHOC = RestaurantCardWithOffer(RestaurantCard);
-
+  const setDataInState = () => {
+    const chainData =
+      mainList?.cards?.[1]?.card?.card?.gridElements?.infoWithStyle
+        ?.restaurants || [];
+    setRestaurantsChain(chainData);
+    console.log("chainData", chainData);
+    const restaurantData =
+      mainList?.cards?.[4]?.card?.card?.gridElements?.infoWithStyle
+        ?.restaurants || [];
+    setRestaurants(restaurantData);
+    console.log("restaurantData", restaurantData);
+  };
   useEffect(() => {
     if (mainList) {
-      const chainData =
-        mainList?.cards?.[1]?.card?.card?.gridElements?.infoWithStyle
-          ?.restaurants || [];
-      setRestaurantsChain(chainData);
-
-      const restaurantData =
-        mainList?.cards?.[4]?.card?.card?.gridElements?.infoWithStyle
-          ?.restaurants || [];
-      setRestaurants(restaurantData);
+      setDataInState();
     }
   }, [mainList]);
 
@@ -50,21 +53,36 @@ export default function Body() {
 
   const searchRestaurants = () => {
     if (filteredRestaurants !== "") {
-      const filterData =
-        restaurants.filter((res) =>
-          res.info.name
-            .toLowerCase()
-            .includes(filteredRestaurants.toLowerCase()),
-        ) ||
-        restaurantsChain.filter((res) =>
+      if (restaurants.length) {
+        const filterData = restaurants.filter((res) =>
           res.info.name
             .toLowerCase()
             .includes(filteredRestaurants.toLowerCase()),
         );
-
-      setRestaurants(filterData || []);
+        setRestaurants(filterData || []);
+      }
+      if (restaurantsChain.length) {
+        const filterData = restaurantsChain.filter((res) =>
+          res.info.name
+            .toLowerCase()
+            .includes(filteredRestaurants.toLowerCase()),
+        );
+        setRestaurantsChain(filterData || []);
+      }
     } else {
-      setRestaurants([restaurants, restaurantsChain].flat() || []);
+      setDataInState();
+    }
+  };
+  const topRatedRestaurants = () => {
+    if (restaurants.length) {
+      const filterData = restaurants.filter((res) => res.info.avgRating > 4.4);
+      setRestaurants(filterData || []);
+    }
+    if (restaurantsChain.length) {
+      const filterData = restaurantsChain.filter(
+        (res) => res.info.avgRating > 4.4,
+      );
+      setRestaurantsChain(filterData || []);
     }
   };
 
@@ -89,40 +107,38 @@ export default function Body() {
         </div>
         <button
           className='bg-orange-500 text-white px-4 py-2 rounded-lg shadow hover:bg-orange-600 transition mt-4 md:mt-0'
-          onClick={() =>
-            setRestaurants(
-              restaurants.filter((res) => res.info.avgRating > 4.4) ||
-                restaurantsChain.filter((res) => res.info.avgRating > 4.4) ||
-                [],
-            )
-          }
+          onClick={() => topRatedRestaurants()}
         >
           Top Rated 🌟
         </button>
       </div>
 
       {/* Top Restaurant Chains */}
-      <div className='mb-8'>
-        <h2 className='text-2xl font-semibold text-gray-800 dark:text-gray-200 mb-4'>
-          Top Restaurant Chains
-        </h2>
-        <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6'>
-          {showAllRestaurants(restaurantsChain)}
+      {restaurantsChain.length > 0 && (
+        <div className='mb-8'>
+          <h2 className='text-2xl font-semibold text-gray-800 dark:text-gray-200 mb-4'>
+            Top Restaurant Chains
+          </h2>
+          <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6'>
+            {showAllRestaurants(restaurantsChain)}
+          </div>
         </div>
-      </div>
+      )}
 
       {/* Divider */}
       <div className='w-full h-0.5 bg-gray-200 dark:bg-gray-700 my-8'></div>
 
       {/* Restaurants with Online Food Delivery */}
-      <div>
-        <h2 className='text-2xl font-semibold text-gray-800 dark:text-gray-200 mb-4'>
-          Restaurants with Online Food Delivery
-        </h2>
-        <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6'>
-          {showAllRestaurants(restaurants)}
+      {restaurants.length > 0 && (
+        <div>
+          <h2 className='text-2xl font-semibold text-gray-800 dark:text-gray-200 mb-4'>
+            Restaurants with Online Food Delivery
+          </h2>
+          <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6'>
+            {showAllRestaurants(restaurants)}
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 
