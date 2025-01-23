@@ -39,6 +39,7 @@ export default function Body() {
             to={`/restaurant/${restaurant.info.id}`}
             key={restaurant.info.id}
             className='hover:shadow-lg transition'
+            data-testid='card'
           >
             {restaurant.info?.aggregatedDiscountInfoV3?.header.includes(
               "OFF",
@@ -116,7 +117,10 @@ export default function Body() {
       {/* Top Restaurant Chains */}
       {restaurantsChain.length > 0 && (
         <div className='mb-8'>
-          <h2 className='text-2xl font-semibold text-gray-800 dark:text-gray-200 mb-4'>
+          <h2
+            className='text-2xl font-semibold text-gray-800 dark:text-gray-200 mb-4'
+            data-testid='top-chain'
+          >
             Top Restaurant Chains
           </h2>
           <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6'>

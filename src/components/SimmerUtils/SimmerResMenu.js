@@ -2,7 +2,7 @@ import React from "react";
 
 function SimmerResMenu() {
   return (
-    <div className='p-6'>
+    <div className='p-6' data-testid='simmerResMenu'>
       {/* Restaurant Details Shimmer */}
       <div className='bg-white dark:bg-gray-800 shadow-lg rounded-xl p-8 mb-8 border-t-4 border-orange-500 animate-pulse'>
         {/* Restaurant Name */}

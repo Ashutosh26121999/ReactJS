@@ -1,7 +1,7 @@
 import {useState} from "react";
 import {useSelector, useDispatch} from "react-redux"; // Import useDispatch for theme toggle
 import {toogleTheme} from "../../Rduex/cartSlice"; // Import theme action
-import logo from "../../Utils/img/RestaurantLogo.png";
+import LOGO from "../../Utils/img/RestaurantLogo.png";
 import {Link} from "react-router-dom";
 import {BsCart3} from "react-icons/bs"; // Cart icon
 import {AiFillHome, AiOutlineInfoCircle, AiFillPhone} from "react-icons/ai"; // Icons for Home, About, and Contact
@@ -17,7 +17,7 @@ const Header = () => {
   return (
     <div className='flex justify-between items-center bg-orange-400 dark:bg-gray-800 shadow-md px-4 py-3 transition-colors duration-300'>
       {/* Logo */}
-      <img className='w-36 flex-shrink-0' src={logo} alt='Logo' />
+      <img className='w-36 flex-shrink-0' src={LOGO} alt='Logo' />
 
       {/* Navigation Menu */}
       <ul className='flex items-center space-x-6 text-white font-medium'>
