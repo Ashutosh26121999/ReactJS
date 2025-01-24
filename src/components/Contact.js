@@ -1,5 +1,7 @@
 import React, {useState} from "react";
 import emailjs from "emailjs-com";
+import toast from "react-hot-toast";
+import {CirclesWithBar} from "react-loader-spinner";
 
 function Contact() {
   const [formData, setFormData] = useState({
@@ -7,6 +9,7 @@ function Contact() {
     email: "",
     message: "",
   });
+  const [sending, setSending] = useState(false);
 
   const handleChange = (e) => {
     const {name, value} = e.target;
@@ -15,6 +18,7 @@ function Contact() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setSending(true);
 
     // Prepare the data for EmailJS
     const templateParams = {
@@ -34,16 +38,19 @@ function Contact() {
       )
       .then(
         (response) => {
-          alert("Your message has been sent!");
+          toast.success("Your message has been sent!");
           setFormData({name: "", email: "", message: ""}); // Clear form
         },
         (error) => {
           console.error("Error sending email:", error);
-          alert(
+          toast.error(
             "Sorry, there was an error sending your message. Please try again.",
           );
         },
-      );
+      )
+      .finally(() => {
+        setSending(false);
+      });
   };
 
   return (
@@ -109,9 +116,24 @@ function Contact() {
 
           <button
             type='submit'
-            className='w-full py-3 bg-orange-500 text-white font-semibold rounded-lg hover:bg-orange-600 transition duration-300'
+            className='w-full py-3 bg-orange-500 text-white font-semibold rounded-lg hover:bg-orange-600 transition duration-300 flex justify-center items-center'
           >
-            Submit
+            {sending ? (
+              <CirclesWithBar
+                height='30'
+                width='30'
+                color='#ffffff'
+                wrapperStyle={{}}
+                wrapperClass=''
+                visible={true}
+                outerCircleColor=''
+                innerCircleColor=''
+                barColor=''
+                ariaLabel='loading-indicator'
+              />
+            ) : (
+              "Submit"
+            )}
           </button>
         </form>
       </div>
