@@ -25,21 +25,21 @@ function Contact() {
       from_name: formData.name,
       from_email: formData.email,
       message: formData.message,
-      to_name: "Namaste React Team", // You can change this as needed
+      to_name: "Namaste React Team",
     };
 
     // Send email using EmailJS
     emailjs
       .send(
-        "service_95u2xq5", // Your EmailJS service ID
-        "template_w2i8g49", // Your EmailJS template ID
-        templateParams, // Data to send in the email
-        "ivc0Ak8nVV9blB5Ly", // Your EmailJS user ID
+        "service_95u2xq5",
+        "template_w2i8g49",
+        templateParams,
+        "ivc0Ak8nVV9blB5Ly",
       )
       .then(
         (response) => {
           toast.success("Your message has been sent!");
-          setFormData({name: "", email: "", message: ""}); // Clear form
+          setFormData({name: "", email: "", message: ""});
         },
         (error) => {
           console.error("Error sending email:", error);
